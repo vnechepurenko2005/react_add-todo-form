@@ -36,7 +36,7 @@ export const App = () => {
       return;
     }
 
-    const nextId = Math.max(0, ...todos.map(t => t.id)) + 1;
+    const nextId = Math.max(0, ...todos.map(todo => todo.id)) + 1;
 
     const selectedUser = usersFromServer.find(
       user => user.id === Number(userId),
@@ -102,7 +102,9 @@ export const App = () => {
             value={userId}
             onChange={handleUserChange}
           >
-            <option value="">Choose a user</option>
+            <option value="" disabled>
+              Choose a user
+            </option>
             {usersFromServer.map(user => (
               <option key={user.id} value={user.id}>
                 {user.name}
