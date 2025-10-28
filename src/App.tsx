@@ -36,14 +36,18 @@ export const App = () => {
       return;
     }
 
-    const selectedUser = usersFromServer.find(u => u.id === Number(userId));
+    const nextId = Math.max(0, ...todos.map(t => t.id)) + 1;
+
+    const selectedUser = usersFromServer.find(
+      user => user.id === Number(userId),
+    );
 
     if (!selectedUser) {
       return;
     }
 
     const newTodo = {
-      id: Math.max(...todos.map(todo => todo.id)) + 1,
+      id: nextId,
       title,
       userId: Number(userId),
       completed: false,
@@ -76,7 +80,7 @@ export const App = () => {
     <div className="App">
       <h1>Add todo form</h1>
 
-      <form action="/api/todos" method="POST" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="field">
           <label htmlFor="title">Title:</label>
           <input
